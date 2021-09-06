@@ -1,0 +1,32 @@
+
+.photospace {
+    animation:fadeinload 5s;
+}
+
+.nametitle{
+    animation:fadeinload 5s;
+}
+
+  @keyframes fadeinload {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+#github:hover{
+    filter: invert(76%) sepia(50%) saturate(4367%) hue-rotate(325deg) brightness(90%) contrast(92%); 
+}
+
+@keyframes gitlogoshake{
+    0%{transform:rotate(0deg);}
+    25%{transform:rotate(10deg);}
+    50%{transform:rotate(0deg);}
+    75%{transform:rotate(-10deg);}
+    100%{transform:rotate(0deg);}
+}
+
+#gitlogo:hover{
+    animation-name:gitlogoshake;
+    animation-duration:0.5s;
+    animation-iteration-count: infinite;
+}
+
