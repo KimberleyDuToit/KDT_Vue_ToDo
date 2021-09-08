@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="fullpage">
+    <div class="fullpage" id="vueArea">
         <a name="top"></a>
         <!--Sticky nav-->
         <nav class="navbar navbar-expand navbar-dark sticky-top px-5 lhn">
@@ -32,9 +32,11 @@
                 <h2>Add a task to your list:</h2>
                 <!--Add a task button-->
                 <div id="addNew">
-                    <input id="writeTaskName" type="text" placeholder="Task Name">
-                    <input id="date" type='date' placeholder="Due Date">
-                    <button id="add" type="button" class="btn btn-primary">
+                    <input id="writeTaskName" type="text" placeholder="Task Name" v-model="liNew.taskName">
+                    <input id="category" type='text' placeholder="Task Category" v-model="liNew.taskCat">
+                    <input id="date" type='date' placeholder="Due Date" v-model="liNew.taskDate">
+                    <input id="priority" type='number' placeholder="Priority #" v-model="liNew.taskPrio">
+                    <button @click="pushTask" id="add" type="button" class="btn btn-primary">
                         Create new task
                     </button>
                 </div>
@@ -46,12 +48,16 @@
                 <div id = "tHeaders">
                     <h2 id="tasks">Tasks</h2>
                     <button id="sort" type="button" class="btn btn-primary">Sort A-Z</button>
+                    <button id="sortCategory" type="button" class="btn btn-primary">Sort by Category</button>
                     <button id="sortDate" type="button" class="btn btn-primary">Sort By Date: Soonest</button>
+                    <button id="sortPrio" type="button" class="btn btn-primary">Sort By Priority: Highest</button>
                 </div>
                 <hr>
                 <!--Section Content, List-->
                 <section>
-                    <ul id="taskList"></ul>
+                    <ul id="taskList">
+                        <li v-for='item in myArray'>{{item.taskName}}</li>
+                    </ul>
                 </section>
 
                 <!--Footer with back to top-->
@@ -65,15 +71,41 @@
     </div>
 
 
-    <!--Javascript, Popper, Jquery bundle-->
+    <!--Vue, Javascript, Popper, Jquery bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
-    <script src="scripts/script.js"></script>
+    <!--<script src="scripts/script.js"></script>-->
 
+    <script>
+        new Vue({
+          el : '#vueArea',
+          data : {
+            liNew : {
+                taskName : '',
+                taskCat :'',
+                taskDate :'',
+                taskPrio : '',
+                taskDone : false,
+                taskEditable : false,
+                taskDelete : false,
+                },
+            
+            myArray : []
+          },
+
+          methods : {
+            pushTask (){
+                //this.myArray.push(this.liNew)//
+                this.myArray.push(Object.assign({}, this.liNew));
+          }
+        }
+        });
+      </script>
 
 </body>
 

@@ -102,6 +102,34 @@ h4 {
     margin-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    max-width: 200px;
+ }
+
+ #priority {
+    flex:1;
+    height:40px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #ffcf2f;
+    margin-right:20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 200px;
+ }
+
+ #category {
+    flex:1;
+    height:40px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #ffcf2f;
+    margin-right:20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     max-width: 400px;
  }
 
@@ -130,6 +158,19 @@ h4 {
     margin-right: 20px;
 }
 
+.btn#sortCategory{
+    height:40px;
+    background-color: #4abb99;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:bold;
+    border-width: 0px;
+    color: #1d1d1d;
+    font-size:14px;
+    max-width: 200px;
+    flex: 1;
+    margin-right: 20px;
+}
+
 .btn#sortDate {
     height:40px;
     background-color: #4abb99;
@@ -139,7 +180,21 @@ h4 {
     color: #1d1d1d;
     font-size:14px;
     max-width: 200px;
-    flex: 1;}
+    flex: 1;
+    margin-right: 20px;
+}
+
+.btn#sortPrio {
+        height:40px;
+        background-color: #4abb99;
+        font-family: 'Montserrat', sans-serif;
+        font-weight:bold;
+        border-width: 0px;
+        color: #1d1d1d;
+        font-size:14px;
+        max-width: 200px;
+        flex: 1;
+    }
  
 #menuheading {
     padding-left:30px;
