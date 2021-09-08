@@ -58,10 +58,10 @@
                 <ul id="taskList">
                     <li class= "liOutput" v-for='item in myArray'>
                         <input class="done" type="checkbox">
-                        <span class="taskOutput" v-model="item.taskName">{{item.taskName}}</span>
-                        <span class="catOutput" v-model="item.taskCat">{{item.taskCat}}</span>
-                        <span class="dateOutput" v-model="item.taskDate">{{item.taskDate}}</span>
-                        <span class="prioOutput" v-model="item.taskPrio">{{item.taskPrio}}</span>
+                        <span id="taskOutputID" class="taskOutput" v-model="item.taskName" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskName}}</span>
+                        <span id="catOutputID" class="catOutput" v-model="item.taskCat" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskCat}}</span>
+                        <span id="dateOutputID" class="dateOutput" v-model="item.taskDate" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskDate}}</span>
+                        <span id="prioOutputID" class="prioOutput" v-model="item.taskPrio" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskPrio}}</span>
                         <button @click="editItem(item)" class="edit">&#128393</button>
                         <button class="remove" v-model="item.taskDelete">&#10005</button>
                     </li>
@@ -109,6 +109,17 @@
             methods: {
                 pushTask() {
                     this.myArray.push(Object.assign({}, this.liNew));
+                    const taskArrStorage = JSON.stringify(this.myArray);
+                    localStorage.setItem("taskArrStorage", taskArrStorage);
+                    console.log('Array Stored in Local')
+                },
+
+                editItem (item){
+                    item.taskEditable = !item.taskEditable;
+                    item.taskName = document.getElementById('taskOutputID').innerHTML;
+                    item.taskCat = document.getElementById('catOutputID').innerHTML;
+                    item.taskDate = document.getElementById('dateOutputID').innerHTML;
+                    item.taskPrio = document.getElementById('prioOutputID').innerHTML;
                     const taskArrStorage = JSON.stringify(this.myArray);
                     localStorage.setItem("taskArrStorage", taskArrStorage);
                     console.log('Array Stored in Local')
