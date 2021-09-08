@@ -56,14 +56,18 @@
             <!--Section Content, List-->
             <section>
                 <ul id="taskList">
-                    <li class= "liOutput" v-for='item in myArray'>
-                        <input class="done" type="checkbox">
-                        <span id="taskOutputID" class="taskOutput" v-model="item.taskName" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskName}}</span>
-                        <span id="catOutputID" class="catOutput" v-model="item.taskCat" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskCat}}</span>
-                        <span id="dateOutputID" class="dateOutput" v-model="item.taskDate" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskDate}}</span>
-                        <span id="prioOutputID" class="prioOutput" v-model="item.taskPrio" :contenteditable="item.taskEditable===true" :class="{editable : item.taskEditable}">{{item.taskPrio}}</span>
+                    <li class="liOutput" v-for='item in myArray'>
+                        <input id="doneOutputID" @click="strike(item)" class="done" type="checkbox">
+                        <span id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
+                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskName}}</span>
+                        <span id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
+                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskCat}}</span>
+                        <span id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
+                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskDate}}</span>
+                        <span id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
+                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskPrio}}</span>
                         <button @click="editItem(item)" class="edit">&#128393</button>
-                        <button class="remove" v-model="item.taskDelete">&#10005</button>
+                        <button class="remove">&#10005</button>
                     </li>
                 </ul>
             </section>
@@ -114,8 +118,10 @@
                     console.log('Array Stored in Local')
                 },
 
-                editItem (item){
+                editItem(item) {
                     item.taskEditable = !item.taskEditable;
+                    console.log(item);
+                    const listObj = item;
                     item.taskName = document.getElementById('taskOutputID').innerHTML;
                     item.taskCat = document.getElementById('catOutputID').innerHTML;
                     item.taskDate = document.getElementById('dateOutputID').innerHTML;
@@ -124,18 +130,36 @@
                     localStorage.setItem("taskArrStorage", taskArrStorage);
                     console.log('Array Stored in Local')
                 },
-            },
-            
-            mounted: function () {
-                    let taskSaved = localStorage.getItem("taskArrStorage");
-                    let taskLoad = JSON.parse(taskSaved);
-                    if (taskLoad === null) {
-                        console.log('No objects in array')
-                    } else {
-                        this.myArray.push(...taskLoad);
-                    }
 
-                    
+                strike (item) {
+                    item.taskDone = !item.taskDone;
+                    const taskArrStorage = JSON.stringify(this.myArray);
+                    localStorage.setItem("taskArrStorage", taskArrStorage);
+                    console.log('Array Stored in Local')
+                }
+            },
+
+            mounted: function (item) {
+                let taskSaved = localStorage.getItem("taskArrStorage");
+                let taskLoad = JSON.parse(taskSaved);
+                if (taskLoad === null) {
+                    console.log('No objects in array')
+                } else {
+                    this.myArray.push(...taskLoad);
+                }
+                let doneButton = document.getElementById("doneOutputID");
+                    if (item.taskDone === true){doneButton.checked = true} else {doneButton.checked= false};
+
+                /*myArray.forEach(ele => {
+                    let taskName = this.taskName;
+                    let dueDate = this.dueDate;
+                    let taskCat = this.taskCat;
+                    let taskPrio = this.taskPrio;
+                    let taskDone = this.taskDone;
+                    let taskEditable = this.taskEditable;
+                    let taskDelete = this.taskDelete;
+                    let taskCreated = ele;
+                })*/
             }
         })
     </script>
