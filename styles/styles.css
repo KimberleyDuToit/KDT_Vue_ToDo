@@ -211,15 +211,15 @@ ul {
     text-decoration: line-through;
 }
 
-.liNew {
+.liOutput {
     display: grid;
-    grid-template-columns: 5% 50% 20% 5% 5% 5%;
+    grid-template-columns: 5% 40% 15% 10% 5% 5% 5%;
     grid-column-gap: 2%;
     margin-bottom: 20px;
     margin-top: 20px;
 }
 
-.done {
+input.done {
     grid-column-start: 1;
     grid-column-end: 1;
     margin-top: auto;
@@ -229,7 +229,7 @@ ul {
     filter: hue-rotate(310deg) brightness(1);
 }
 
-.task {
+.taskOutput {
     grid-column-start: 2;
     grid-column-end: 2;
     margin-top: auto;
@@ -244,8 +244,8 @@ ul {
 }
 
 .remove {
-    grid-column-start: 5;
-    grid-column-end: 5;
+    grid-column-start: 7;
+    grid-column-end: 7;
     border-radius: 3px;
     background-color: #1d1d1d;
     border-style: none;
@@ -258,8 +258,8 @@ ul {
 }
 
 .edit {
-    grid-column-start: 4;
-    grid-column-end: 4;
+    grid-column-start: 6;
+    grid-column-end: 6;
     border-radius: 3px;
     background-color:#4abb99;
     border-style: none;
