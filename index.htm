@@ -43,31 +43,31 @@
             </div>
         </header>
 
-        <!--Main Area-->        
-            <div class="mainArea container-fluid content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 p-5 mx-auto">
-                <div id = "tHeaders">
-                    <h2 id="tasks">Tasks</h2>
-                    <button id="sort" type="button" class="btn btn-primary">Sort A-Z</button>
-                    <button id="sortCategory" type="button" class="btn btn-primary">Sort by Category</button>
-                    <button id="sortDate" type="button" class="btn btn-primary">Sort By Date: Soonest</button>
-                    <button id="sortPrio" type="button" class="btn btn-primary">Sort By Priority: Highest</button>
-                </div>
-                <hr>
-                <!--Section Content, List-->
-                <section>
-                    <ul id="taskList">
-                        <li v-for='item in myArray'>{{item.taskName}}</li>
-                    </ul>
-                </section>
-
-                <!--Footer with back to top-->
-                <footer>
-                    <hr>
-                    <a id="backtotop" href="#top">Back to the top of page</a>
-                </footer>
-
+        <!--Main Area-->
+        <div class="mainArea container-fluid content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 p-5 mx-auto">
+            <div id="tHeaders">
+                <h2 id="tasks">Tasks</h2>
+                <button id="sort" type="button" class="btn btn-primary">Sort A-Z</button>
+                <button id="sortCategory" type="button" class="btn btn-primary">Sort by Category</button>
+                <button id="sortDate" type="button" class="btn btn-primary">Sort By Date: Soonest</button>
+                <button id="sortPrio" type="button" class="btn btn-primary">Sort By Priority: Highest</button>
             </div>
-        
+            <hr>
+            <!--Section Content, List-->
+            <section>
+                <ul id="taskList">
+                    <li v-for='item in myArray'>{{item.taskName}}</li>
+                </ul>
+            </section>
+
+            <!--Footer with back to top-->
+            <footer>
+                <hr>
+                <a id="backtotop" href="#top">Back to the top of page</a>
+            </footer>
+
+        </div>
+
     </div>
 
 
@@ -83,29 +83,42 @@
 
     <script>
         new Vue({
-          el : '#vueArea',
-          data : {
-            liNew : {
-                taskName : '',
-                taskCat :'',
-                taskDate :'',
-                taskPrio : '',
-                taskDone : false,
-                taskEditable : false,
-                taskDelete : false,
+            el: '#vueArea',
+            data: {
+                liNew: {
+                    taskName: '',
+                    taskCat: '',
+                    taskDate: '',
+                    taskPrio: '',
+                    taskDone: false,
+                    taskEditable: false,
+                    taskDelete: false,
                 },
-            
-            myArray : []
-          },
 
-          methods : {
-            pushTask (){
-                //this.myArray.push(this.liNew)//
-                this.myArray.push(Object.assign({}, this.liNew));
-          }
-        }
-        });
-      </script>
+                myArray: []
+            },
+
+            methods: {
+                pushTask() {
+                    this.myArray.push(Object.assign({}, this.liNew));
+                    const taskArrStorage = JSON.stringify(this.myArray);
+                    localStorage.setItem("taskArrStorage", taskArrStorage);
+                    console.log('Array Stored in Local')
+                },
+            },
+            mounted: function () {
+            
+                    let taskSaved = localStorage.getItem("taskArrStorage");
+                    let taskLoad = JSON.parse(taskSaved);
+                    if (taskLoad === null) {
+                        console.log('No objects in array')
+                    } else {
+                        this.myArray.push(...taskLoad);
+                    }
+                
+            }
+        })
+    </script>
 
 </body>
 
