@@ -81,7 +81,7 @@
 
                 <ul id="taskList">
                     <li class="liOutput" v-for='(item, index) in myArray'>
-                        <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox">
+                        <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox" v-model="item.taskDone">
                         <span id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
                             :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskName}}</span>
                         <span id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
@@ -142,10 +142,8 @@
                     console.log('Array Stored in Local')
                 },
 
-                editItem(item) {
+                editItem(item, index) {
                     item.taskEditable = !item.taskEditable;
-                    console.log(item);
-                    const listObj = item;
                     item.taskName = document.getElementById('taskOutputID').innerHTML;
                     item.taskCat = document.getElementById('catOutputID').innerHTML;
                     item.taskDate = document.getElementById('dateOutputID').innerHTML;
