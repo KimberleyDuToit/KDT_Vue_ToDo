@@ -54,10 +54,34 @@
             </div>
             <hr>
             <!--Section Content, List-->
-            <section>
+            <!--<section>
+                <div v-for="(item, index) in myArray" class='todoOutput'>
+                    <div class="done" @click="strike(item)">
+                        <input id="doneOutputID"  type="checkbox">
+                    </div>
+                    <div class="taskOutput">
+                        {{item.taskName}}
+                    </div>
+                    <div class="catOutput">
+                        {{item.taskCat}}
+                    </div>
+                    <div class="dateOutput">
+                        {{item.taskDate}}
+                    </div>
+                    <div class="prioOutput">
+                        {{item.taskPrio}}
+                    </div>
+                    <div class="edit">
+                        <button @click="editItem(item)">&#128393</button>
+                    </div>
+                    <div class="remove" @click="delete(item,index)">
+                        &#10005
+                    </div>
+                </div>-->
+
                 <ul id="taskList">
-                    <li class="liOutput" v-for='item in myArray'>
-                        <input id="doneOutputID" @click="strike(item)" class="done" type="checkbox">
+                    <li class="liOutput" v-for='(item, index) in myArray'>
+                        <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox">
                         <span id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
                             :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskName}}</span>
                         <span id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
@@ -66,8 +90,8 @@
                             :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskDate}}</span>
                         <span id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
                             :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskPrio}}</span>
-                        <button @click="editItem(item)" class="edit">&#128393</button>
-                        <button class="remove">&#10005</button>
+                        <button @click="editItem (item, index)" class="edit">&#128393</button>
+                        <button @click="deleteItem (item, index)" class="remove">&#10005</button>
                     </li>
                 </ul>
             </section>
@@ -131,12 +155,19 @@
                     console.log('Array Stored in Local')
                 },
 
-                strike (item) {
+                strike(item) {
                     item.taskDone = !item.taskDone;
                     const taskArrStorage = JSON.stringify(this.myArray);
                     localStorage.setItem("taskArrStorage", taskArrStorage);
                     console.log('Array Stored in Local')
-                }
+                },
+
+                deleteItem(item, index) {
+                    this.myArray.splice(index,1);
+                    const taskArrStorage = JSON.stringify(this.myArray);
+                    localStorage.setItem("taskArrStorage", taskArrStorage);
+                    console.log('Array Stored in Local')
+                },
             },
 
             mounted: function (item) {

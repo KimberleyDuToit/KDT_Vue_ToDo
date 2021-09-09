@@ -200,6 +200,14 @@ h4 {
     padding-left:30px;
 }
 
+.todoOutput {
+    display: grid;
+    grid-template-columns: 5% 40% 15% 10% 5% 5% 5%;
+    grid-column-gap: 2%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
 ul {
     font-size:16px;
     line-height: 35px;
@@ -220,7 +228,7 @@ ul {
     margin-top: 20px;
 }
 
-input.done {
+.done {
     grid-column-start: 1;
     grid-column-end: 1;
     margin-top: auto;
