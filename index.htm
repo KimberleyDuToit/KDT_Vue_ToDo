@@ -47,10 +47,10 @@
         <div class="mainArea container-fluid content col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 p-5 mx-auto">
             <div id="tHeaders">
                 <h2 id="tasks">Tasks</h2>
-                <button id="sort" type="button" class="btn btn-primary">Sort A-Z</button>
-                <button id="sortCategory" type="button" class="btn btn-primary">Sort by Category</button>
-                <button id="sortDate" type="button" class="btn btn-primary">Sort By Date: Soonest</button>
-                <button id="sortPrio" type="button" class="btn btn-primary">Sort By Priority: Highest</button>
+                <button @click="sort('taskName')" id="sort" type="button" class="btn btn-primary">Sort A-Z</button>
+                <button @click="sort('taskCat')" id="sortCategory" type="button" class="btn btn-primary">Sort by Category</button>
+                <button @click="sort('taskDate')" id="sortDate" type="button" class="btn btn-primary">Sort By Date</button>
+                <button @click="sort('taskPrio')" id="sortPrio" type="button" class="btn btn-primary">Sort By Priority</button>
             </div>
             <hr>
             <!--Section Content, List-->
@@ -79,21 +79,22 @@
                     </div>
                 </div>-->
 
-                <ul id="taskList">
-                    <li class="liOutput" v-for='(item, index) in myArray'>
-                        <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox" v-model="item.taskDone">
-                        <span id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
-                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskName}}</span>
-                        <span id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
-                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskCat}}</span>
-                        <span id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
-                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskDate}}</span>
-                        <span id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
-                            :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskPrio}}</span>
-                        <button @click="editItem (item, index)" class="edit">&#128393</button>
-                        <button @click="deleteItem (item, index)" class="remove">&#10005</button>
-                    </li>
-                </ul>
+            <ul id="taskList">
+                <li class="liOutput" v-for='(item, index) in sortedItems'>
+                    <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox"
+                        v-model="item.taskDone">
+                    <span id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
+                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskName}}</span>
+                    <span id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
+                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskCat}}</span>
+                    <span id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
+                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskDate}}</span>
+                    <span id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
+                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskPrio}}</span>
+                    <button @click="editItem (item, index)" class="edit">&#128393</button>
+                    <button @click="deleteItem (item, index)" class="remove">&#10005</button>
+                </li>
+            </ul>
             </section>
 
             <!--Footer with back to top-->
@@ -131,7 +132,10 @@
                     taskDelete: false,
                 },
 
-                myArray: []
+                myArray: [],
+
+                sortBy: 'name',
+                sortDirection: 'asc',
             },
 
             methods: {
@@ -161,11 +165,18 @@
                 },
 
                 deleteItem(item, index) {
-                    this.myArray.splice(index,1);
+                    this.myArray.splice(index, 1);
                     const taskArrStorage = JSON.stringify(this.myArray);
                     localStorage.setItem("taskArrStorage", taskArrStorage);
                     console.log('Array Stored in Local')
                 },
+
+                sort: function (s) {
+                    if (s === this.sortBy) {
+                        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+                    }
+                    this.sortBy = s;
+                }
             },
 
             mounted: function (item) {
@@ -177,7 +188,7 @@
                     this.myArray.push(...taskLoad);
                 }
                 let doneButton = document.getElementById("doneOutputID");
-                    if (item.taskDone === true){doneButton.checked = true} else {doneButton.checked= false};
+                if (item.taskDone === true) { doneButton.checked = true } else { doneButton.checked = false };
 
                 /*myArray.forEach(ele => {
                     let taskName = this.taskName;
@@ -189,7 +200,19 @@
                     let taskDelete = this.taskDelete;
                     let taskCreated = ele;
                 })*/
-            }
+            },
+
+            computed: {
+                sortedItems: function () {
+                    return this.myArray.sort((p1, p2) => {
+                        let modifier = 1;
+                        if (this.sortDirection === 'desc') modifier = -1;
+                        if (p1[this.sortBy] < p2[this.sortBy]) return -1 * modifier; if (p1[this.sortBy] > p2[this.sortBy]) return 1 * modifier;
+                        return 0;
+                    });
+                }
+            },
+
         })
     </script>
 
