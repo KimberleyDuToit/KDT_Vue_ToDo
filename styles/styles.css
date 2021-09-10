@@ -280,10 +280,11 @@ ul {
     font-weight: bold;
 }
 
-.editable {
-    background-color: #fff;
-    border-radius:4px;
+.taskField {
+    border-radius: 4px;
 }
+
+/*Links & Hovers ////////////////////////////////////////////////////////////////////////////////////*/
 
 .edit:hover {
     background-color: #56dab2;
@@ -323,7 +324,7 @@ a#backtotop:hover {
     color: #56dab2;
 }
 
-
+/*Media ////////////////////////////////////////////////////////////////////////////////////////*/
 
 @media only screen and (max-width: 799px) {
     .liNew {
@@ -450,6 +451,7 @@ a#backtotop:hover {
         padding-right: 4%;
     }   
 }
+
 
 @media only screen and (max-width: 567px) {
     .liNew {

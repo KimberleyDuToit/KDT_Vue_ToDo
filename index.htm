@@ -83,14 +83,23 @@
                 <li class="liOutput" v-for='(item, index) in sortedItems'>
                     <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox"
                         v-model="item.taskDone">
-                    <span id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
-                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskName}}</span>
-                    <span id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
-                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskCat}}</span>
-                    <span id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
-                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskDate}}</span>
-                    <span id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
-                        :class="{editable : item.taskEditable, strike : item.taskDone}">{{item.taskPrio}}</span>
+
+                    <span v-if="!item.taskEditable" id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
+                        :class="{strike : item.taskDone}">{{item.taskName}}</span>
+                        <input v-if="item.taskEditable" type="text" v-model="item.taskName" class="taskField">
+
+                    <span v-if="!item.taskEditable" id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
+                        :class="{strike : item.taskDone}">{{item.taskCat}}</span>
+                        <input v-if="item.taskEditable" type="text" v-model="item.taskCat" class="taskField">
+
+                    <span v-if="!item.taskEditable" id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
+                        :class="{strike : item.taskDone}">{{item.taskDate}}</span>
+                        <input v-if="item.taskEditable" type="text" v-model="item.taskDate" class="taskField">
+
+                    <span v-if="!item.taskEditable" id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
+                        :class="{strike : item.taskDone}">{{item.taskPrio}}</span>
+                        <input v-if="item.taskEditable" type="text" v-model="item.taskPrio" class="taskField">
+
                     <button @click="editItem (item, index)" class="edit">&#128393</button>
                     <button @click="deleteItem (item, index)" class="remove">&#10005</button>
                 </li>
@@ -148,10 +157,6 @@
 
                 editItem(item, index) {
                     item.taskEditable = !item.taskEditable;
-                    item.taskName = document.getElementById('taskOutputID').innerHTML;
-                    item.taskCat = document.getElementById('catOutputID').innerHTML;
-                    item.taskDate = document.getElementById('dateOutputID').innerHTML;
-                    item.taskPrio = document.getElementById('prioOutputID').innerHTML;
                     const taskArrStorage = JSON.stringify(this.myArray);
                     localStorage.setItem("taskArrStorage", taskArrStorage);
                     console.log('Array Stored in Local')
