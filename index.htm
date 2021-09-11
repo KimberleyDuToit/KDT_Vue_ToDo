@@ -54,39 +54,47 @@
             <div id="tHeaders">
                 <h2 id="tasks">Tasks</h2>
                 <button @click="sort('taskName')" id="sort" type="button" class="btn btn-primary">Sort A-Z</button>
-                <button @click="sort('taskCat')" id="sortCategory" type="button" class="btn btn-primary">Sort by Category</button>
-                <button @click="sort('taskDate')" id="sortDate" type="button" class="btn btn-primary">Sort By Date</button>
-                <button @click="sort('taskPrio')" id="sortPrio" type="button" class="btn btn-primary">Sort By Priority</button>
+                <button @click="sort('taskCat')" id="sortCategory" type="button" class="btn btn-primary">Sort by
+                    Category</button>
+                <button @click="sort('taskDate')" id="sortDate" type="button" class="btn btn-primary">Sort By
+                    Date</button>
+                <button @click="sort('taskPrio')" id="sortPrio" type="button" class="btn btn-primary">Sort By
+                    Priority</button>
             </div>
             <hr>
             <!--Section Content, List-->
-            
+
             <ul id="taskList">
                 <li class="liOutput" v-for='(item, index) in sortedItems'>
                     <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox"
                         v-model="item.taskDone">
 
-                    <span v-if="!item.taskEditable" id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
+                    <span v-if="!item.taskEditable" id="taskOutputID" class="taskOutput"
+                        :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone}">{{item.taskName}}</span>
-                        <input id="nameEdit" v-if="item.taskEditable" type="text" v-model="item.taskName" class="taskField">
+                    <input id="nameEdit" v-if="item.taskEditable" type="text" v-model="item.taskName" class="taskField">
 
-                    <span v-if="!item.taskEditable" id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
+                    <span v-if="!item.taskEditable" id="catOutputID" class="catOutput"
+                        :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone}">{{item.taskCat}}</span>
-                        <input id="catEdit" v-if="item.taskEditable" type="text" v-model="item.taskCat" class="taskField">
+                    <input id="catEdit" v-if="item.taskEditable" type="text" v-model="item.taskCat" class="taskField">
 
-                    <span v-if="!item.taskEditable" id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
+                    <span v-if="!item.taskEditable" id="dateOutputID" class="dateOutput"
+                        :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone}">{{item.taskDate}}</span>
-                        <input id="dateEdit" v-if="item.taskEditable" type="date" v-model="item.taskDate" class="taskField">
+                    <input id="dateEdit" v-if="item.taskEditable" type="date" v-model="item.taskDate" class="taskField">
 
-                    <span v-if="!item.taskEditable" id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
+                    <span v-if="!item.taskEditable" id="prioOutputID" class="prioOutput"
+                        :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone, highPrio:item.taskPrio === 'Urgent', medPrio:item.taskPrio === 'Regular', lowPrio:item.taskPrio === 'Low Priority'}">{{item.taskPrio}}</span>
-                        <!--<input v-if="item.taskEditable" type="number" v-model="item.taskPrio" class="taskField">-->
-                        <select id="prioEdit" v-if="item.taskEditable" type="number" v-model="item.taskPrio" class="taskField">
-                            <option value="" disabled selected hidden>Priority</option>
-                            <option value="Urgent">Urgent</option>
-                            <option value="Regular">Regular</option>
-                            <option value="Low Priority">Low Priority</option>
-                        </select>
+                    <!--<input v-if="item.taskEditable" type="number" v-model="item.taskPrio" class="taskField">-->
+                    <select id="prioEdit" v-if="item.taskEditable" type="number" v-model="item.taskPrio"
+                        class="taskField">
+                        <option value="" disabled selected hidden>Priority</option>
+                        <option value="Urgent">Urgent</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Low Priority">Low Priority</option>
+                    </select>
 
                     <button @click="editItem (item, index)" class="edit">&#128393</button>
                     <button @click="deleteItem (item, index)" class="remove">&#10005</button>
@@ -113,6 +121,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
+        
     <!--<script src="scripts/script.js"></script>-->
 
     <script>
@@ -182,17 +191,6 @@
                 }
                 let doneButton = document.getElementById("doneOutputID");
                 if (item.taskDone === true) { doneButton.checked = true } else { doneButton.checked = false };
-
-                /*myArray.forEach(ele => {
-                    let taskName = this.taskName;
-                    let dueDate = this.dueDate;
-                    let taskCat = this.taskCat;
-                    let taskPrio = this.taskPrio;
-                    let taskDone = this.taskDone;
-                    let taskEditable = this.taskEditable;
-                    let taskDelete = this.taskDelete;
-                    let taskCreated = ele;
-                })*/
             },
 
             computed: {
