@@ -60,31 +60,7 @@
             </div>
             <hr>
             <!--Section Content, List-->
-            <!--<section>
-                <div v-for="(item, index) in myArray" class='todoOutput'>
-                    <div class="done" @click="strike(item)">
-                        <input id="doneOutputID"  type="checkbox">
-                    </div>
-                    <div class="taskOutput">
-                        {{item.taskName}}
-                    </div>
-                    <div class="catOutput">
-                        {{item.taskCat}}
-                    </div>
-                    <div class="dateOutput">
-                        {{item.taskDate}}
-                    </div>
-                    <div class="prioOutput">
-                        {{item.taskPrio}}
-                    </div>
-                    <div class="edit">
-                        <button @click="editItem(item)">&#128393</button>
-                    </div>
-                    <div class="remove" @click="delete(item,index)">
-                        &#10005
-                    </div>
-                </div>-->
-
+            
             <ul id="taskList">
                 <li class="liOutput" v-for='(item, index) in sortedItems'>
                     <input id="doneOutputID" @click="strike(item,index)" class="done" type="checkbox"
@@ -92,20 +68,20 @@
 
                     <span v-if="!item.taskEditable" id="taskOutputID" class="taskOutput" :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone}">{{item.taskName}}</span>
-                        <input v-if="item.taskEditable" type="text" v-model="item.taskName" class="taskField">
+                        <input id="nameEdit" v-if="item.taskEditable" type="text" v-model="item.taskName" class="taskField">
 
                     <span v-if="!item.taskEditable" id="catOutputID" class="catOutput" :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone}">{{item.taskCat}}</span>
-                        <input v-if="item.taskEditable" type="text" v-model="item.taskCat" class="taskField">
+                        <input id="catEdit" v-if="item.taskEditable" type="text" v-model="item.taskCat" class="taskField">
 
                     <span v-if="!item.taskEditable" id="dateOutputID" class="dateOutput" :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone}">{{item.taskDate}}</span>
-                        <input v-if="item.taskEditable" type="date" v-model="item.taskDate" class="taskField">
+                        <input id="dateEdit" v-if="item.taskEditable" type="date" v-model="item.taskDate" class="taskField">
 
                     <span v-if="!item.taskEditable" id="prioOutputID" class="prioOutput" :contenteditable="item.taskEditable===true"
                         :class="{strike : item.taskDone, highPrio:item.taskPrio === 'Urgent', medPrio:item.taskPrio === 'Regular', lowPrio:item.taskPrio === 'Low Priority'}">{{item.taskPrio}}</span>
                         <!--<input v-if="item.taskEditable" type="number" v-model="item.taskPrio" class="taskField">-->
-                        <select v-if="item.taskEditable" type="number" v-model="item.taskPrio" class="taskField">
+                        <select id="prioEdit" v-if="item.taskEditable" type="number" v-model="item.taskPrio" class="taskField">
                             <option value="" disabled selected hidden>Priority</option>
                             <option value="Urgent">Urgent</option>
                             <option value="Regular">Regular</option>
