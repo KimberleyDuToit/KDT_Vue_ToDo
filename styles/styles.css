@@ -21,9 +21,10 @@ body {
 }
 
 .addPanel {
-    background-color: #00635a;
+    background-color: #3A6AC0;
     display:flex;
     flex-wrap: wrap;
+    background-image: url("gradient5.png");
 }
 
 div#addNew {
@@ -46,6 +47,7 @@ h2#tasks {
     color: #1d1d1d;
     flex: 1;
     padding: 0px;
+    max-width: 117px;
 }
 
 h3 {
@@ -64,10 +66,9 @@ h4 {
 }
 
 #tHeaders {
-    display:grid;
-    grid-template-columns: 5% 35% 15% 10% 10% 5% 5%;
-    grid-column-gap: 2%;
+    display:flex;
     vertical-align: center;
+    width:100%;
 }
 
 .lhn {
@@ -86,7 +87,7 @@ h4 {
    border-radius: 4px;
    border-style: solid;
    border-width: 2px;
-   border-color: #ffcf2f;
+   border-color: #e17fef;
    margin-right:20px;
    margin-bottom: 20px;
    padding-left: 20px;
@@ -99,7 +100,7 @@ h4 {
     border-radius: 4px;
     border-style: solid;
     border-width: 2px;
-    border-color: #ffcf2f;
+    border-color: #e17fef;
     margin-right:20px;
     margin-bottom: 20px;
     padding-left: 20px;
@@ -113,7 +114,7 @@ h4 {
     border-radius: 4px;
     border-style: solid;
     border-width: 2px;
-    border-color: #ffcf2f;
+    border-color: #e17fef;
     margin-right:20px;
     margin-bottom: 20px;
     padding-left: 20px;
@@ -127,7 +128,7 @@ h4 {
     border-radius: 4px;
     border-style: solid;
     border-width: 2px;
-    border-color: #ffcf2f;
+    border-color: #e17fef;
     margin-right:20px;
     margin-bottom: 20px;
     padding-left: 20px;
@@ -138,7 +139,7 @@ h4 {
  .btn#add {
     flex:1;
     height:40px;
-    background-color: #ffcf2f;
+    background-color: #e17fef;
     font-family: 'Montserrat', sans-serif;
     font-weight:bold;
     border-width: 0px;
@@ -148,43 +149,40 @@ h4 {
  }
 
 .btn#sort{
-    grid-column-start: 2;
-    grid-column-end:2;
     height:40px;
-    background-color: #4abb99;
+    background-color: #efefef;
     font-family: 'Montserrat', sans-serif;
     font-weight:bold;
-    border-width: 0px;
+    border-width: 1px;
+    border-color: #56dab2;
     color: #1d1d1d;
     font-size:14px;
-    max-width: 200px;
     flex: 1;
     margin-right: 20px;
+    max-width:627px;
 }
 
 .btn#sortCategory{
-    grid-column-start: 3;
-    grid-column-end:3;
     height:40px;
-    background-color: #4abb99;
+    background-color: #efefef;
     font-family: 'Montserrat', sans-serif;
     font-weight:bold;
-    border-width: 0px;
+    border-width: 1px;
+    border-color: #56dab2;
     color: #1d1d1d;
     font-size:14px;
-    max-width: 200px;
+    max-width: 400px;
     flex: 1;
     margin-right: 20px;
 }
 
 .btn#sortDate {
-    grid-column-start: 4;
-    grid-column-end:4;
     height:40px;
-    background-color: #4abb99;
+    background-color: #efefef;
     font-family: 'Montserrat', sans-serif;
     font-weight:bold;
-    border-width: 0px;
+    border-width: 1px;
+    border-color: #56dab2;
     color: #1d1d1d;
     font-size:14px;
     max-width: 200px;
@@ -193,13 +191,12 @@ h4 {
 }
 
 .btn#sortPrio {
-    grid-column-start: 5;
-    grid-column-end:5;
         height:40px;
-        background-color: #4abb99;
+        background-color: #efefef;
         font-family: 'Montserrat', sans-serif;
         font-weight:bold;
-        border-width: 0px;
+        border-width: 1px;
+        border-color: #56dab2;
         color: #1d1d1d;
         font-size:14px;
         max-width: 200px;
@@ -210,13 +207,6 @@ h4 {
     padding-left:30px;
 }
 
-.todoOutput {
-    display: grid;
-    grid-template-columns: 5% 35% 15% 10% 10% 5% 5%;
-    grid-column-gap: 2%;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
 
 ul {
     font-size:16px;
@@ -232,7 +222,7 @@ ul {
 
 .liOutput {
     display: grid;
-    grid-template-columns: 5% 35% 15% 10% 10% 5% 5%;
+    grid-template-columns: 5% 33% 21% 10% 10% 4% 3%;
     grid-column-gap: 2%;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -280,28 +270,29 @@ ul {
     grid-column-start: 6;
     grid-column-end: 6;
     border-radius: 3px;
-    background-color:#4abb99;
+    background-color:#56dab2;
     border-style: none;
     width: 40px;
     height: 40px;
     font-size: 20px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0px;
     font-weight: bold;
 }
 
 .taskField {
     border-radius: 4px;
+    border-width: 1px;
 }
 
 .highPrio {
-    background-color: #ffc2a9;
+    background-color: #f078ba;
     border-radius: 4px;
     padding-left:20px;
     padding-right:20px;
 }
 .medPrio {
-    background-color: #ffe5ac;
+    background-color: #f3cefc;
     border-radius: 4px;
     padding-left:20px;
     padding-right:20px;
@@ -327,6 +318,14 @@ ul {
     background-color: #56dab2;
 }
 
+.btn#sortCategory:hover {
+    background-color: #56dab2;
+}
+
+.btn#sortPrio:hover {
+    background-color: #56dab2;
+}
+
 .remove:hover {
     background-color: #424242;
 }
@@ -336,9 +335,9 @@ a {
 }
 
 .btn#add:hover {
-    background-color: #ffbb00
+    background-color: #f9c7ff
 }
-
+;
 .content {
     background-color: #efefef;
 }    
@@ -382,7 +381,7 @@ a#backtotop:hover {
     .btn#add{
         flex: none;
         height:40px;
-        background-color: #ffcf2f;
+        background-color: #e17fef;
         font-family: 'Montserrat', sans-serif;
         font-weight:bold;
         border-width: 0px;
@@ -452,7 +451,7 @@ a#backtotop:hover {
     .btn#add{
         flex: none;
         height:40px;
-        background-color: #ffcf2f;
+        background-color: #e17fef;
         font-family: 'Montserrat', sans-serif;
         font-weight:bold;
         border-width: 0px;
@@ -523,7 +522,7 @@ a#backtotop:hover {
     .btn#add {
         flex: none;
         height:40px;
-        background-color: #ffcf2f;
+        background-color: #e17fef;
         font-family: 'Montserrat', sans-serif;
         font-weight:bold;
         border-width: 0px;
@@ -548,7 +547,7 @@ a#backtotop:hover {
     .btn#add {
         flex: none;
         height:40px;
-        background-color: #ffcf2f;
+        background-color: #e17fef;
         font-family: 'Montserrat', sans-serif;
         font-weight:bold;
         border-width: 0px;
@@ -632,7 +631,7 @@ a#backtotop:hover {
     .btn#add {
         flex: none;
         height:40px;
-        background-color: #ffcf2f;
+        background-color: #e17fef;
         font-family: 'Montserrat', sans-serif;
         font-weight:bold;
         border-width: 0px;
